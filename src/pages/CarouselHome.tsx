@@ -5,7 +5,15 @@ import { motion, AnimatePresence } from "framer-motion";
 import Advertisement from "src/common/images/Advertisement.jpg";
 import SignUp from "src/common/images/SignUp.jpg";
 
-function FirstCarouselSlide({ page }) {
+type FirstCarouselSlideProps = {
+  page: number;
+};
+
+const FirstCarouselSlide: React.FunctionComponent<FirstCarouselSlideProps> = (
+  props
+) => {
+  const { page } = props;
+
   console.log("page", page);
   return (
     <Carousel.Slide
@@ -40,9 +48,13 @@ function FirstCarouselSlide({ page }) {
       )}
     </Carousel.Slide>
   );
-}
+};
 
-function SecondCarouselSlide({ page }) {
+const SecondCarouselSlide: React.FunctionComponent<FirstCarouselSlideProps> = (
+  props
+) => {
+  const { page } = props;
+
   return (
     <Carousel.Slide
       style={{
@@ -78,7 +90,7 @@ function SecondCarouselSlide({ page }) {
       )}
     </Carousel.Slide>
   );
-}
+};
 
 function CarouselHome() {
   const [embla, setEmbla] = useState<Embla | null>(null);
