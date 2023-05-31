@@ -80,7 +80,7 @@ function ApplicationHeader() {
           <h5>My App</h5>
         </Group>
 
-        <Button radius="xl" h={30}>
+        <div>
           <SignedIn>
             {/* Mount the UserButton component */}
             <UserButton afterSignOutUrl="/" />
@@ -89,7 +89,7 @@ function ApplicationHeader() {
             {/* Signed out users get sign in button */}
             <SignInButton />
           </SignedOut>
-        </Button>
+        </div>
       </Container>
     </Header>
   );

@@ -3,22 +3,7 @@ import { type NextPage } from "next";
 // import Link from "next/link";
 import Hero from "./Hero";
 import ApplicationHeader from "./ApplicationHeader";
-
-// function Header() {
-//   return (
-//     <header className="flex justify-between bg-black p-5 text-white">
-//       <h5>My App</h5>
-// <SignedIn>
-//   {/* Mount the UserButton component */}
-//   <UserButton afterSignOutUrl="/" />
-// </SignedIn>
-// <SignedOut>
-//   {/* Signed out users get sign in button */}
-//   <SignInButton />
-// </SignedOut>
-//     </header>
-//   );
-// }
+import CarouselHome from "./CarouselHome";
 
 const Home: NextPage = () => {
   // const hello = api.example.hello.useQuery({ text: "from tRPC" });
@@ -26,6 +11,7 @@ const Home: NextPage = () => {
   return (
     <>
       <ApplicationHeader />
+      <CarouselHome />
       <Hero />
       <main className="bg-b flex min-h-screen flex-col items-center justify-center">
         Hello
