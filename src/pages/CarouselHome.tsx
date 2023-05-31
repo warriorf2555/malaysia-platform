@@ -14,7 +14,6 @@ const FirstCarouselSlide: React.FunctionComponent<FirstCarouselSlideProps> = (
 ) => {
   const { page } = props;
 
-  console.log("page", page);
   return (
     <Carousel.Slide
       style={{
