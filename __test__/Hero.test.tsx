@@ -1,6 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
-import Hero from "./Hero";
+import Hero from "~/pages/Hero";
 
 describe("Hero Component", () => {
   it("it must have title", () => {
