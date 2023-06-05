@@ -4,6 +4,7 @@ import { type NextPage } from "next";
 
 import ApplicationHeader from "../common/ApplicationHeader";
 import Footer from "../common/Footer";
+// import LandingPage from "~/landingPage";
 import LandingPage from "~/landingPage";
 
 const Home: NextPage = () => {
@@ -14,9 +15,9 @@ const Home: NextPage = () => {
       <ApplicationHeader />
       <LandingPage />
       <Footer />
-      <main className="bg-b flex min-h-screen flex-col items-center justify-center">
+      {/* <main className="bg-b flex min-h-screen flex-col items-center justify-center">
         Hello
-      </main>
+      </main> */}
     </>
   );
 };
