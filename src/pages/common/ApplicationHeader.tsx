@@ -174,8 +174,8 @@ function ApplicationHeader() {
   ));
 
   return (
-    <Box>
-      <Header height={60} px="md">
+    <Box style={{ position: "relative" }} pb={63}>
+      <Header height={60} px="md" style={{ position: "fixed" }}>
         <Group position="apart" sx={{ height: "100%" }}>
           <IconAbacus size={28} />
 
