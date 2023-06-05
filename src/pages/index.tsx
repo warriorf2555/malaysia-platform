@@ -5,7 +5,7 @@ import { type NextPage } from "next";
 import ApplicationHeader from "../common/ApplicationHeader";
 import Footer from "../common/Footer";
 // import LandingPage from "~/landingPage";
-import LandingPage from "~/landingPage";
+import LandingPage from "~/landingPage/index";
 
 const Home: NextPage = () => {
   // const hello = api.example.hello.useQuery({ text: "from tRPC" });
