@@ -14,9 +14,9 @@ const Home: NextPage = () => {
       <ApplicationHeader />
       <LandingPage />
       <Footer />
-      {/* <main className="bg-b flex min-h-screen flex-col items-center justify-center">
+      <main className="bg-b flex min-h-screen flex-col items-center justify-center">
         Hello
-      </main> */}
+      </main>
     </>
   );
 };
