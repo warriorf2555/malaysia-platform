@@ -18,7 +18,10 @@
     "noUncheckedIndexedAccess": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./src/*"]
+      "~/*": ["./src/*"],
+
+      // Aliases for image import
+      "@/images/*": ["public//static/images/*"]
     }
   },
   "include": [

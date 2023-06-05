@@ -4,7 +4,7 @@ import {
   Header,
   Container,
   Group,
-  Button,
+  // Button,
   rem,
 } from "@mantine/core";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";

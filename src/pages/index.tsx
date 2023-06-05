@@ -2,8 +2,10 @@ import { type NextPage } from "next";
 // import Head from "next/head";
 // import Link from "next/link";
 import Hero from "./Hero";
-import ApplicationHeader from "./ApplicationHeader";
+import ApplicationHeader from "./common/ApplicationHeader";
 import CarouselHome from "./CarouselHome";
+import Showcase from "./Showcase";
+import Footer from "./common/Footer";
 
 const Home: NextPage = () => {
   // const hello = api.example.hello.useQuery({ text: "from tRPC" });
@@ -13,9 +15,11 @@ const Home: NextPage = () => {
       <ApplicationHeader />
       <CarouselHome />
       <Hero />
-      <main className="bg-b flex min-h-screen flex-col items-center justify-center">
+      <Showcase />
+      <Footer />
+      {/* <main className="bg-b flex min-h-screen flex-col items-center justify-center">
         Hello
-      </main>
+      </main> */}
     </>
   );
 };

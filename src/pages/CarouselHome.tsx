@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Carousel, Embla } from "@mantine/carousel";
+import { Carousel, type Embla } from "@mantine/carousel";
 import { motion, AnimatePresence } from "framer-motion";
 
-import Advertisement from "src/common/images/Advertisement.jpg";
-import SignUp from "src/common/images/SignUp.jpg";
+import Advertisement from "@/images/Advertisement.jpg";
+import SignUp from "@/images/SignUp.jpg";
 
 type FirstCarouselSlideProps = {
   page: number;
