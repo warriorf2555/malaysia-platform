@@ -4,7 +4,7 @@ import Hero from "./Hero";
 import CarouselHome from "./CarouselHome";
 import Showcase from "./Showcase";
 
-function Index() {
+function LandingPage() {
   return (
     <React.Fragment>
       <CarouselHome />
@@ -14,4 +14,4 @@ function Index() {
   );
 }
 
-export default Index;
+export default LandingPage;
