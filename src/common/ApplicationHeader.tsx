@@ -184,7 +184,7 @@ function ApplicationHeader() {
             spacing={0}
             className={classes.hiddenMobile}
           >
-            <a href="#" className={classes.link}>
+            <a href="" className={classes.link}>
               Home
             </a>
             <HoverCard
