@@ -109,7 +109,7 @@ function CarouselHome() {
       embla.on("scroll", handleScroll);
       handleScroll();
     }
-  }, [embla]);
+  }, [embla, handleScroll]);
 
   return (
     <main className="flex">
