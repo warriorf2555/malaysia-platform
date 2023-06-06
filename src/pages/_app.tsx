@@ -5,6 +5,9 @@ import { MantineProvider } from "@mantine/core";
 import { api } from "~/utils/api";
 import "~/styles/globals.css";
 
+import ApplicationHeader from "../common/components/ApplicationHeader";
+import Footer from "../common/components/Footer";
+
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
     <>
@@ -25,7 +28,11 @@ const MyApp: AppType = ({ Component, pageProps }) => {
             colorScheme: "light",
           }}
         >
-          <Component {...pageProps} />
+          <main className="flex min-h-screen flex-col">
+            <ApplicationHeader />
+            <Component {...pageProps} />
+            <Footer />
+          </main>
         </MantineProvider>
       </ClerkProvider>
     </>
