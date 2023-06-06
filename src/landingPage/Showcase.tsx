@@ -11,7 +11,7 @@ import {
 } from "@mantine/core";
 import { IconGauge, IconUser, IconCookie } from "@tabler/icons-react";
 
-const mockdata = [
+export const mockdata = [
   {
     title: "Extreme performance",
     description:
@@ -85,6 +85,7 @@ function Showcase() {
       radius="md"
       className={classes.card}
       padding="xl"
+      data-testid="card"
     >
       {/* <feature.icon size={rem(50)} stroke={2} color={theme.fn.primaryColor()} /> */}
       {feature.icon}

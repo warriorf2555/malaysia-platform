@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import Hero from "~/pages/Hero";
+import Hero from "~/landingPage/Hero";
 
 describe("Hero Component", () => {
   it("it must have title", () => {
