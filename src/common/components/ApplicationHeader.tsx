@@ -40,6 +40,7 @@ import {
   IconChevronDown,
 } from "@tabler/icons-react";
 import { IconAbacus } from "@tabler/icons-react";
+import Link from "next/link";
 
 const useStyles = createStyles((theme) => ({
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -244,9 +245,9 @@ function ApplicationHeader() {
             <a href="#" className={classes.link}>
               Learn
             </a>
-            <a href="#" className={classes.link}>
-              Academy
-            </a>
+            <Link href="/register" className={classes.link}>
+              Register
+            </Link>
           </Group>
 
           <Group className={classes.hiddenMobile}>
