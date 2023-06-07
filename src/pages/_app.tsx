@@ -28,6 +28,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
             colorScheme: "light",
           }}
         >
+          {/* <main className="flex min-h-screen flex-col flex-wrap"> */}
           <main className="flex min-h-screen flex-col">
             <ApplicationHeader />
             <Component {...pageProps} />
