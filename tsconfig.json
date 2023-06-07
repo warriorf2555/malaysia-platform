@@ -21,7 +21,10 @@
       "~/*": ["./src/*"],
 
       // Aliases for image import
-      "@/images/*": ["public//static/images/*"]
+      "@/images/*": ["public//static/images/*"],
+
+      // Aliases for common import
+      "@/common/*": ["./src/common/components/*"]
     }
   },
   "include": [

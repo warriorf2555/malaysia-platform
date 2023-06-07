@@ -5,8 +5,8 @@ import { MantineProvider } from "@mantine/core";
 import { api } from "~/utils/api";
 import "~/styles/globals.css";
 
-import ApplicationHeader from "../common/components/ApplicationHeader";
-import Footer from "../common/components/Footer";
+import ApplicationHeader from "@/common/ApplicationHeader";
+import Footer from "@/common/Footer";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
@@ -25,7 +25,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
           withNormalizeCSS
           theme={{
             /** Put your mantine theme override here */
-            colorScheme: "light",
+            colorScheme: "dark",
           }}
         >
           {/* <main className="flex min-h-screen flex-col flex-wrap"> */}

@@ -1,59 +1,111 @@
 import React from "react";
-// import { Grid, Container } from "@mantine/core";
+import InputField from "@/common/InputField/InputField";
 
-import {
-  TextInput,
-  Tooltip,
-  Center,
-  Text,
-  SimpleGrid,
-  Container,
-  Stack,
-  Grid,
-} from "@mantine/core";
-import { IconInfoCircle } from "@tabler/icons-react";
-
-function TooltipIcon() {
-  const rightSection = (
-    <Tooltip
-      label="We store your data securely"
-      position="top-end"
-      withArrow
-      transitionProps={{ transition: "pop-bottom-right" }}
-    >
-      <Text color="dimmed" sx={{ cursor: "help" }}>
-        <Center>
-          <IconInfoCircle size="1.1rem" stroke={1.5} />
-        </Center>
-      </Text>
-    </Tooltip>
-  );
-
-  return (
-    <TextInput
-      rightSection={rightSection}
-      label="Tooltip shown on icon hover"
-      placeholder="Your email"
-    />
-  );
-}
+import { Button, Container, Grid, Title } from "@mantine/core";
+import { useForm } from "@mantine/form";
 
 function Register() {
+  const form = useForm({
+    initialValues: {
+      firstName: "",
+      termsOfService: false,
+    },
+
+    validate: {
+      firstName: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
+    },
+  });
+
   return (
     <Container my="md">
-      <SimpleGrid cols={3} breakpoints={[{ maxWidth: "md", cols: 1 }]}>
-        <div className="flex justify-center">
-          Business Name<span className="text-red-500">*</span>
-        </div>
+      <form onSubmit={form.onSubmit((values) => console.log(values))}>
+        {/* Business Owner */}
+        <Grid className="mt-[12px]">
+          <Grid.Col xs={4} className="flex items-center justify-center">
+            <Title className="text-lg">
+              Business Owner<span className="text-red-500">*</span>
+            </Title>
+          </Grid.Col>
 
-        <Stack className="flex justify-center">
-          <TooltipIcon />
-        </Stack>
+          <Grid.Col xs={4}>
+            <InputField
+              label="First Name"
+              placeholder=""
+              {...form.getInputProps("firstName")}
+            />
+          </Grid.Col>
 
-        <Stack className="flex justify-center">
-          <TooltipIcon />
-        </Stack>
-      </SimpleGrid>
+          <Grid.Col xs={4}>
+            <InputField label="Last Name" placeholder="" />
+          </Grid.Col>
+        </Grid>
+
+        {/* Business Name */}
+        <Grid className="mt-[24px]">
+          <Grid.Col xs={4} className="flex items-center justify-center">
+            <Title className="text-lg">
+              Business Name<span className="text-red-500">*</span>
+            </Title>
+          </Grid.Col>
+          <Grid.Col xs={8}>
+            <InputField label="" placeholder="" />
+          </Grid.Col>
+        </Grid>
+
+        <Grid className="mt-[24px]">
+          <Grid.Col xs={4} className="flex items-center justify-center">
+            <Title className="text-lg">
+              Contact Number<span className="text-red-500">*</span>
+            </Title>
+          </Grid.Col>
+          <Grid.Col xs={8}>
+            <InputField label="" placeholder="" />
+          </Grid.Col>
+        </Grid>
+
+        {/* Street Address 1 */}
+        <Grid className="mt-[24px]">
+          <Grid.Col xs={4} className="flex items-center justify-center">
+            <Title className="text-lg">
+              Address<span className="text-red-500">*</span>
+            </Title>
+          </Grid.Col>
+          <Grid.Col xs={8}>
+            <InputField label="Street Address" placeholder="" />
+          </Grid.Col>
+        </Grid>
+
+        {/* Street Address 2 */}
+        <Grid className="mt-[12px]">
+          <Grid.Col xs={4} className="flex items-center justify-center" />
+          <Grid.Col xs={8}>
+            <InputField label="Street Address Line 2" placeholder="" />
+          </Grid.Col>
+        </Grid>
+
+        {/* City / State / Province */}
+        <Grid className="mt-[12px]">
+          <Grid.Col xs={4} className="flex items-center justify-center" />
+
+          <Grid.Col xs={4}>
+            <InputField label="City" placeholder="" />
+          </Grid.Col>
+
+          <Grid.Col xs={4}>
+            <InputField label="State / Province" placeholder="" />
+          </Grid.Col>
+        </Grid>
+
+        {/* Street Address 2 */}
+        <Grid className="mt-[12px]">
+          <Grid.Col xs={4} className="flex items-center justify-center" />
+          <Grid.Col xs={8}>
+            <InputField label="Postal / Zip Code" placeholder="" />
+          </Grid.Col>
+        </Grid>
+
+        <Button type="submit">Submit</Button>
+      </form>
     </Container>
   );
 }
