@@ -2,11 +2,20 @@ import React, { useState } from "react";
 
 import { Stepper, Button, Group } from "@mantine/core";
 import ShopOverview from "~/createShop/Overview";
+import { api } from "~/utils/api";
 
 function Overview() {
   const [active, setActive] = useState(0);
-  const nextStep = () =>
+  const { mutate, isSuccess } = api.shop.create.useMutation();
+
+  const nextStep = () => {
+    if (active === 0) {
+      console.log("mutation");
+      mutate({ title: "first shop" });
+    }
+
     setActive((current) => (current < 3 ? current + 1 : current));
+  };
   const prevStep = () =>
     setActive((current) => (current > 0 ? current - 1 : current));
 

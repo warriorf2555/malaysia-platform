@@ -31,21 +31,21 @@ model Account {
 model Shop {
   // This is what mongoDb uses to generate random string
   id     String @id @default(auto()) @map("_id") @db.ObjectId
-  userId String @db.ObjectId
+  userId String @unique
 
-  title         String
-  description   String
-  locationValue String
-  businessOwnerFirstName String
-  businessOwnerLastName String
-  businessName String
-  contactNumber String
-  addressLine1 String
+  title         String?
+  description   String?
+  locationValue String?
+  businessOwnerFirstName String?
+  businessOwnerLastName String?
+  businessName String?
+  contactNumber String?
+  addressLine1 String?
   addressLine2 String?
-  addressCity String
-  addressState String
-  addressPostalCode String
+  addressCity String?
+  addressState String?
+  addressPostalCode String?
 
   // Creating relation with user
-  user Account @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user Account @relation(fields: [userId], references: [userId], onDelete: Cascade)
 }
