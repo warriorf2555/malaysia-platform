@@ -2,16 +2,50 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-    provider = "prisma-client-js"
-    previewFeatures = ["jsonProtocol"]
+  provider        = "prisma-client-js"
+  previewFeatures = ["jsonProtocol"]
 }
 
 datasource db {
-    provider = "mongodb"
-    url      = env("DATABASE_URL")
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
 }
 
-model User {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
+model Account {
+  // User ID come from clerk
+  userId String @unique
+
+  // This is what mongoDb uses to generate random string
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
   // Other fields
+  emails String[] 
+
+  // Favourite IDs
+  favouriteIds String[] @db.ObjectId
+  // Liked
+  likedIds     String[] @db.ObjectId
+
+  Shop Shop[]
+}
+
+model Shop {
+  // This is what mongoDb uses to generate random string
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @db.ObjectId
+
+  title         String
+  description   String
+  locationValue String
+  businessOwnerFirstName String
+  businessOwnerLastName String
+  businessName String
+  contactNumber String
+  addressLine1 String
+  addressLine2 String?
+  addressCity String
+  addressState String
+  addressPostalCode String
+
+  // Creating relation with user
+  user Account @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

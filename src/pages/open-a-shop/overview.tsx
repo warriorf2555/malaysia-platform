@@ -1,13 +1,10 @@
 import React, { useState } from "react";
-import InputField from "@/common/InputField/InputField";
 
-import { Stepper, Button, Group, Container } from "@mantine/core";
+import { Stepper, Button, Group } from "@mantine/core";
+import ShopOverview from "~/createShop/Overview";
 
-// import { Button, Container, Grid, Title } from "@mantine/core";
-// import { useForm } from "@mantine/form";
-
-function Register() {
-  const [active, setActive] = useState(1);
+function Overview() {
+  const [active, setActive] = useState(0);
   const nextStep = () =>
     setActive((current) => (current < 3 ? current + 1 : current));
   const prevStep = () =>
@@ -21,8 +18,8 @@ function Register() {
         breakpoint="sm"
         allowNextStepsSelect={false}
       >
-        <Stepper.Step label="First step" description="Create an account">
-          Step 1 content: Create an account
+        <Stepper.Step label="First step" description="Overview">
+          <ShopOverview />
         </Stepper.Step>
         <Stepper.Step label="Second step" description="Verify email">
           Step 2 content: Verify email
@@ -35,14 +32,16 @@ function Register() {
         </Stepper.Completed>
       </Stepper>
 
-      <Group position="center" mt="xl">
-        <Button variant="default" onClick={prevStep}>
-          Back
-        </Button>
+      <Group position="right" className="mt-auto">
+        {active !== 0 ? (
+          <Button variant="default" onClick={prevStep}>
+            Back
+          </Button>
+        ) : null}
         <Button onClick={nextStep}>Next step</Button>
       </Group>
     </div>
   );
 }
 
-export default Register;
+export default Overview;

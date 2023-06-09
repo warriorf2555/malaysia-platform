@@ -259,12 +259,10 @@ function ApplicationHeader() {
                 </SignedIn>
               </>
             ) : (
-              <Button variant="default">
-                <SignedOut>
-                  {/* Signed out users get sign in button */}
-                  <SignInButton />
-                </SignedOut>
-              </Button>
+              <SignedOut>
+                {/* Signed out users get sign in button */}
+                <SignInButton />
+              </SignedOut>
             )}
           </Group>
 
