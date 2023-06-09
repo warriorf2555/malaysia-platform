@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import {
   SignedIn,
@@ -41,6 +41,7 @@ import {
 } from "@tabler/icons-react";
 import { IconAbacus } from "@tabler/icons-react";
 import Link from "next/link";
+import { api } from "~/utils/api";
 
 const useStyles = createStyles((theme) => ({
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -153,8 +154,22 @@ function ApplicationHeader() {
   const { classes, theme } = useStyles();
 
   const user = useUser();
+  const { mutate } = api.account.create.useMutation();
 
-  // console.log("user", user);
+  const { data = [false], isSuccess } = api.account.getAccountByUserId.useQuery(
+    { userId: user.user?.id || "" },
+    {
+      enabled: !!user.isSignedIn,
+    }
+  );
+
+  useEffect(() => {
+    if (data[0] === false && user.isSignedIn && data.length === 0) {
+      mutate();
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess]);
 
   const links = mockdata.map((item) => (
     <UnstyledButton className={classes.subLink} key={item.title}>
