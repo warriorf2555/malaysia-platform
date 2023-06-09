@@ -5,11 +5,11 @@ import GradientCard from "@/common/GradientCard/GradientCard";
 
 function Overview() {
   return (
-    <div className="flex min-h-[73vh] items-center justify-center">
+    <div className="flex min-h-[80vh] items-center justify-center">
       <Grid>
         <Grid.Col xs={12}>
           <Title order={1}>
-            It is easier to{" "}
+            z It is easier to{" "}
             <Text span c="blue" inherit>
               market
             </Text>{" "}

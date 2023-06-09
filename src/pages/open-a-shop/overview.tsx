@@ -1,52 +1,31 @@
-import React, { useState } from "react";
-
-import { Stepper, Button, Group } from "@mantine/core";
-import ShopOverview from "~/createShop/Overview";
+import React, { useEffect } from "react";
 import { api } from "~/utils/api";
+import { useRouter } from "next/router";
+
+import { Button, Group } from "@mantine/core";
+import ShopOverview from "~/createShop/Overview";
 
 function Overview() {
-  const [active, setActive] = useState(0);
-  const { mutate, isSuccess } = api.shop.create.useMutation();
+  const { mutate, isSuccess, data } = api.shop.create.useMutation();
+  const router = useRouter();
 
   const nextStep = () => {
-    if (active === 0) {
-      console.log("mutation");
-      mutate({ title: "first shop" });
+    mutate();
+  };
+
+  useEffect(() => {
+    if (data) {
+      void router.push(`/open-a-shop/${data}/type`);
     }
 
-    setActive((current) => (current < 3 ? current + 1 : current));
-  };
-  const prevStep = () =>
-    setActive((current) => (current > 0 ? current - 1 : current));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess]);
 
   return (
     <div>
-      <Stepper
-        active={active}
-        onStepClick={setActive}
-        breakpoint="sm"
-        allowNextStepsSelect={false}
-      >
-        <Stepper.Step label="First step" description="Overview">
-          <ShopOverview />
-        </Stepper.Step>
-        <Stepper.Step label="Second step" description="Verify email">
-          Step 2 content: Verify email
-        </Stepper.Step>
-        <Stepper.Step label="Final step" description="Get full access">
-          Step 3 content: Get full access
-        </Stepper.Step>
-        <Stepper.Completed>
-          Completed, click back button to get to previous step
-        </Stepper.Completed>
-      </Stepper>
+      <ShopOverview />
 
       <Group position="right" className="mt-auto">
-        {active !== 0 ? (
-          <Button variant="default" onClick={prevStep}>
-            Back
-          </Button>
-        ) : null}
         <Button onClick={nextStep}>Next step</Button>
       </Group>
     </div>

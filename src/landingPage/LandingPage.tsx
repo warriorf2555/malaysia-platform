@@ -7,7 +7,7 @@ import Showcase from "./Showcase";
 function LandingPage() {
   return (
     <React.Fragment>
-      <CarouselHome />
+      {/* <CarouselHome /> */}
       <Hero />
       <Showcase />
     </React.Fragment>

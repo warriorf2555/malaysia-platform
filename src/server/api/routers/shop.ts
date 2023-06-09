@@ -10,24 +10,17 @@ export const shopRouter = createTRPCRouter({
     return ctx.prisma.shop.findMany();
   }),
 
-  create: privateProcedure
-    .input(
-      z.object({
-        title: z.string(),
-      })
-    )
-    .mutation(async ({ ctx, input }) => {
-      const userId = ctx.userId;
+  create: privateProcedure.mutation(async ({ ctx }) => {
+    const userId = ctx.userId;
 
-      const shop = await ctx.prisma.shop.create({
-        data: {
-          userId: userId,
-          title: input.title,
-        },
-      });
+    const shop = await ctx.prisma.shop.create({
+      data: {
+        userId: userId,
+      },
+    });
 
-      return shop;
-    }),
+    return shop.id;
+  }),
 });
 
 // hello: publicProcedure
