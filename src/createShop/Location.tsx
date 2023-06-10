@@ -44,7 +44,7 @@ const Location: React.FunctionComponent<LocationProps> = (props) => {
           zoom={15}
           mapContainerStyle={{
             width: "60%",
-            height: "50vh",
+            height: "55vh",
             borderRadius: "25px",
           }}
         >
