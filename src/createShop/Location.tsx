@@ -25,9 +25,7 @@ const Location: React.FunctionComponent<LocationProps> = (props) => {
   };
 
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey:
-      process.env.GOOGLE_MAP_API_KEY ||
-      "AIzaSyDlBlvifO09HIMcoKimw85FJOtSw1dlPaw",
+    googleMapsApiKey: process.env.GOOGLE_MAP_API_KEY || "",
   });
 
   const CENTER = { lat: 3.1313526387981856, lng: 101.69261347057947 };
