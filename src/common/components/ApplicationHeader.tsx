@@ -260,7 +260,7 @@ function ApplicationHeader() {
             <a href="#" className={classes.link}>
               Learn
             </a>
-            <Link href="/register" className={classes.link}>
+            <Link href="/open-a-shop/overview" className={classes.link}>
               Register
             </Link>
           </Group>

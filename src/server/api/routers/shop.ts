@@ -21,6 +21,41 @@ export const shopRouter = createTRPCRouter({
 
     return shop.id;
   }),
+
+  updateType: privateProcedure
+    .input(z.object({ type: z.number() }))
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.userId;
+
+      const updateShop = await ctx.prisma.shop.update({
+        where: {
+          userId: userId,
+        },
+        data: {
+          type: input.type,
+        },
+      });
+
+      return updateShop;
+    }),
+
+  updateLocation: privateProcedure
+    .input(z.object({ lat: z.number(), lng: z.number() }))
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.userId;
+
+      const updateShop = await ctx.prisma.shop.update({
+        where: {
+          userId: userId,
+        },
+        data: {
+          latitude: input.lat,
+          longitude: input.lng,
+        },
+      });
+
+      return updateShop;
+    }),
 });
 
 // hello: publicProcedure

@@ -33,9 +33,15 @@ model Shop {
   id     String @id @default(auto()) @map("_id") @db.ObjectId
   userId String @unique
 
-  title         String?
-  description   String?
-  locationValue String?
+  // Know when the shop is created
+  createdAt DateTime? @default(now())
+  updatedAt  DateTime?
+
+  type Int?
+  title String?
+  description String?
+  latitude Float?
+  longitude Float?
   businessOwnerFirstName String?
   businessOwnerLastName String?
   businessName String?

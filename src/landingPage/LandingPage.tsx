@@ -1,7 +1,7 @@
 import React from "react";
 
 import Hero from "./Hero";
-import CarouselHome from "./CarouselHome";
+// import CarouselHome from "./CarouselHome";
 import Showcase from "./Showcase";
 
 function LandingPage() {

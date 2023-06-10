@@ -1,4 +1,6 @@
 import React from "react";
+import { api } from "~/utils/api";
+import { useRouter } from "next/router";
 
 import {
   createStyles,
@@ -87,13 +89,21 @@ const useStyles = createStyles((theme) => ({
 
 function Type() {
   const { classes, theme } = useStyles();
+  const { mutate } = api.shop.updateType.useMutation();
+  const router = useRouter();
+  const { newShop } = router.query;
 
   const links = providerType.map((item) => (
     <UnstyledButton
       className={classes.subLink}
       key={item.title}
       onClick={() => {
-        console.log("item", item.code);
+        mutate({ type: item.code });
+
+        // Only when newShop is string and not undefined
+        if (newShop && typeof newShop === "string") {
+          void router.push(`/open-a-shop/${newShop}/location`);
+        }
       }}
     >
       <div className="flex items-center justify-center">
