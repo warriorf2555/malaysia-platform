@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { useJsApiLoader, GoogleMap, Marker } from "@react-google-maps/api";
 
@@ -15,6 +15,8 @@ type LocationProps = {
 };
 
 const Location: React.FunctionComponent<LocationProps> = (props) => {
+  const [isLoading, setLoading] = useState(true);
+
   const onMapClick = (e: google.maps.MapMouseEvent) => {
     props.setMarker({
       lat: e.latLng?.lat() || 0,
@@ -32,46 +34,33 @@ const Location: React.FunctionComponent<LocationProps> = (props) => {
 
   // Loading Indicators
   if (!isLoaded) {
-    return <>hello</>;
+    return <>Loading...</>;
   }
 
-  if (props.isConfirm) {
+  console.log("props", props.marker);
+
+  setTimeout(() => setLoading(false), 10);
+
+  if (!isLoading) {
     return (
-      <div className="min-w-screen flex items-center justify-end">
+      <div
+        className={`min-w-screen flex ${
+          props.isConfirm ? "min-h-[68vh] justify-end" : "justify-center"
+        } items-center `}
+      >
         {/* Display Google map */}
         <GoogleMap
           center={CENTER}
           zoom={15}
           mapContainerStyle={{
             width: "60%",
-            height: "55vh",
-            borderRadius: "25px",
-          }}
-        >
-          <Marker
-            key={props.marker.lat}
-            position={{
-              lat: props.marker.lat,
-              lng: props.marker.lng,
-            }}
-          />
-        </GoogleMap>
-      </div>
-    );
-  } else {
-    return (
-      <div className="min-w-screen flex min-h-[68vh] items-center justify-center">
-        {/* Display Google map */}
-        <GoogleMap
-          center={CENTER}
-          zoom={15}
-          mapContainerStyle={{
-            width: "60%",
-            height: "68vh",
+            height: props.isConfirm ? "55vh" : "68vh",
             borderRadius: "25px",
           }}
           mapContainerClassName=""
-          onClick={onMapClick}
+          onClick={(e) => {
+            props.isConfirm ? "" : onMapClick(e);
+          }}
         >
           <Marker
             key={props.marker.lat}

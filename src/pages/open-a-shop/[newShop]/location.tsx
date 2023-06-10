@@ -98,6 +98,7 @@ function LocationView() {
           {!isConfirm ? (
             <Group position="right" className="mt-auto">
               <Button
+                type="button"
                 disabled={marker.lat === 0 && marker.lng === 0}
                 onClick={() => {
                   setConfirm(true);
