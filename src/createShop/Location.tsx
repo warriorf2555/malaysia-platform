@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useJsApiLoader, GoogleMap, Marker } from "@react-google-maps/api";
 
@@ -30,13 +30,19 @@ const Location: React.FunctionComponent<LocationProps> = (props) => {
 
   const CENTER = { lat: 3.1313526387981856, lng: 101.69261347057947 };
 
+  // DEV NOTE: Cheaky way to refresh form
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 10);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
+
   // Loading Indicators
   if (!isLoaded) {
     return <>Loading...</>;
   }
-
-  // DEV NOTE: Cheaky way to refresh form
-  setTimeout(() => setLoading(false), 10);
 
   if (!isLoading) {
     return (
