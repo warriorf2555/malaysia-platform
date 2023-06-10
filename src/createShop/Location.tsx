@@ -37,8 +37,7 @@ const Location: React.FunctionComponent<LocationProps> = (props) => {
     return <>Loading...</>;
   }
 
-  console.log("props", props.marker);
-
+  // DEV NOTE: Cheaky way to refresh form
   setTimeout(() => setLoading(false), 10);
 
   if (!isLoading) {
