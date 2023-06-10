@@ -164,7 +164,7 @@ function ApplicationHeader() {
   );
 
   useEffect(() => {
-    if (data[0] === false && user.isSignedIn && data.length === 0) {
+    if ((data[0] === false && user.isSignedIn) || data.length === 0) {
       mutate();
     }
 
