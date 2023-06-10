@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { env } from "~/env.mjs";
 
 import { useJsApiLoader, GoogleMap, Marker } from "@react-google-maps/api";
 
@@ -25,7 +26,7 @@ const Location: React.FunctionComponent<LocationProps> = (props) => {
   };
 
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: process.env.GOOGLE_MAP_API_KEY || "",
+    googleMapsApiKey: env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY,
   });
 
   const CENTER = { lat: 3.1313526387981856, lng: 101.69261347057947 };
