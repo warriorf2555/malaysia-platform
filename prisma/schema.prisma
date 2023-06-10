@@ -40,14 +40,20 @@ model Shop {
   type Int?
   title String?
   description String?
-  latitude Float?
-  longitude Float?
+
   businessOwnerFirstName String?
   businessOwnerLastName String?
   businessName String?
   contactNumber String?
+  
+
+  latitude Float?
+  longitude Float?
+  buildingNumber String?
+  buildingName String?
   addressLine1 String?
   addressLine2 String?
+  addressTown String?
   addressCity String?
   addressState String?
   addressPostalCode String?

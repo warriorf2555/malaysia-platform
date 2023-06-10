@@ -1,19 +1,15 @@
 import React, { useState } from "react";
-import { api } from "~/utils/api";
 
-import { Group, Button } from "@mantine/core";
+import { Group, Button, Grid } from "@mantine/core";
 import { IconMapSearch } from "@tabler/icons-react";
 
 import CircleProgress from "@/common/RingProgress/CircleProgress";
 import Location from "~/createShop/Location";
+import LocationForm from "~/createShop/LocationForm";
 
 function LocationView() {
   const [marker, setMarker] = useState({ lat: 0, lng: 0 });
-  const { mutate } = api.shop.updateLocation.useMutation();
-
-  const handleLocation = () => {
-    mutate({ lat: marker.lat, lng: marker.lng });
-  };
+  const [isConfirm, setConfirm] = useState(false);
 
   return (
     <div>
@@ -23,16 +19,35 @@ function LocationView() {
         </CircleProgress>
       </Group>
 
-      <Location marker={marker} setMarker={setMarker} />
+      {isConfirm ? (
+        <Grid className="flex max-h-[80vh] min-h-[70vh] max-w-[100vw] items-center justify-center">
+          <Grid.Col xs={4}>
+            <Location
+              isConfirm={isConfirm}
+              marker={marker}
+              setMarker={setMarker}
+            />
+          </Grid.Col>
+          <Grid.Col xs={4}>
+            <LocationForm marker={marker} />
+          </Grid.Col>
+        </Grid>
+      ) : (
+        <Location isConfirm={isConfirm} marker={marker} setMarker={setMarker} />
+      )}
 
-      <Group position="right" className="mt-auto">
-        <Button
-          disabled={marker.lat === 0 && marker.lng === 0}
-          onClick={handleLocation}
-        >
-          Next step
-        </Button>
-      </Group>
+      {!isConfirm ? (
+        <Group position="right" className="mt-auto">
+          <Button
+            disabled={marker.lat === 0 && marker.lng === 0}
+            onClick={() => {
+              setConfirm(true);
+            }}
+          >
+            Next step
+          </Button>
+        </Group>
+      ) : null}
     </div>
   );
 }
