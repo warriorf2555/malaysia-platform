@@ -9,7 +9,7 @@ function Overview() {
       <Grid>
         <Grid.Col xs={12}>
           <Title order={1}>
-            z It is easier to{" "}
+            It is easier to{" "}
             <Text span c="blue" inherit>
               market
             </Text>{" "}

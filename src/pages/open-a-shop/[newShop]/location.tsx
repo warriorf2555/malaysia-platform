@@ -1,12 +1,14 @@
 import { z } from "zod";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { api } from "~/utils/api";
 import { useRouter } from "next/router";
+
 import {
   LocationFormProvider,
   useLocationForm,
 } from "~/createShop/location-form-context";
 import { zodResolver } from "@mantine/form";
+
 import { errorCode } from "~/common/constants/errorCode";
 
 import { Group, Button, Grid } from "@mantine/core";
@@ -26,7 +28,9 @@ const schema = z.object({
 });
 
 function LocationView() {
-  const { mutate } = api.shop.updateLocation.useMutation();
+  const { mutate, data, isSuccess } = api.shop.updateLocation.useMutation();
+  const [marker, setMarker] = useState({ lat: 0, lng: 0 });
+  const [isConfirm, setConfirm] = useState(false);
   const router = useRouter();
   const { newShop } = router.query;
 
@@ -45,8 +49,14 @@ function LocationView() {
 
     validate: zodResolver(schema),
   });
-  const [marker, setMarker] = useState({ lat: 0, lng: 0 });
-  const [isConfirm, setConfirm] = useState(false);
+
+  useEffect(() => {
+    if (data) {
+      void router.push(`/open-a-shop/${data.id}/catch-the-eye`);
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess]);
 
   return (
     <div>
