@@ -2,7 +2,7 @@ import React from "react";
 import { useRouter } from "next/router";
 
 import { Button, Group } from "@mantine/core";
-import { IconMapSearch } from "@tabler/icons-react";
+import { IconEyeHeart } from "@tabler/icons-react";
 
 import CatchTheEyeShowcase from "~/createShop/CatchTheEyeShowcase";
 import CircleProgress from "@/common/RingProgress/CircleProgress";
@@ -19,8 +19,8 @@ function CatchTheEye() {
   return (
     <div>
       <Group position="right">
-        <CircleProgress value={20}>
-          <IconMapSearch size={22} />
+        <CircleProgress value={35}>
+          <IconEyeHeart size={22} />
         </CircleProgress>
       </Group>
 
