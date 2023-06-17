@@ -96,7 +96,9 @@ function Type() {
 
   const providerSet = getEnumArray(providerType);
 
-  const links = providerSet.forEach((item) => (
+  console.log("providerSet", providerSet[0]);
+
+  const links = providerSet.map((item) => (
     <UnstyledButton
       className={classes.subLink}
       key={item.title}

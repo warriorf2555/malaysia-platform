@@ -20,13 +20,15 @@ export function getEnumArray<
   T extends {
     [key: string]: {
       code: number;
+      title: string;
+      [k: string]: unknown;
     };
   }
 >(enumObject: T) {
-  const enumSet = new Set();
+  const enumSet = [];
 
   for (const key in enumObject) {
-    enumSet.add(enumObject[key]);
+    enumSet.push(enumObject[key]);
   }
 
   // enumSet.forEach((set1) => {
