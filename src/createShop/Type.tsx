@@ -14,6 +14,7 @@ import {
 } from "@mantine/core";
 
 import { providerType } from "~/common/constants/providerType";
+import { getEnumObjectByCode, getEnumArray } from "~/helper";
 
 const useStyles = createStyles((theme) => ({
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -93,7 +94,9 @@ function Type() {
   const router = useRouter();
   const { newShop } = router.query;
 
-  const links = providerType.map((item) => (
+  const providerSet = getEnumArray(providerType);
+
+  const links = providerSet.forEach((item) => (
     <UnstyledButton
       className={classes.subLink}
       key={item.title}

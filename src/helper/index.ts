@@ -1,1 +1,1 @@
-export { getEnumObjectByCode } from "./enumHelpers";
+export { getEnumObjectByCode, getEnumArray } from "./enumHelpers";

@@ -2,6 +2,8 @@ export function getEnumObjectByCode<
   T extends {
     [key: string]: {
       code: number;
+      title: string;
+      [k: string]: unknown;
     };
   }
 >(enumObject: T, code: number) {
@@ -10,6 +12,26 @@ export function getEnumObjectByCode<
   );
 
   return result
-    ? enumObject[result] || { code: "", title: "" }
-    : { code: "", title: "" };
+    ? enumObject[result] || { code: "", title: "This object is unavailable" }
+    : { code: "", title: "This object is unavailable" };
+}
+
+export function getEnumArray<
+  T extends {
+    [key: string]: {
+      code: number;
+    };
+  }
+>(enumObject: T) {
+  const enumSet = new Set();
+
+  for (const key in enumObject) {
+    enumSet.add(enumObject[key]);
+  }
+
+  // enumSet.forEach((set1) => {
+  //   console.log(set1);
+  // });
+
+  return enumSet;
 }
