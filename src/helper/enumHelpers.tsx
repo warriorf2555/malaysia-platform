@@ -31,8 +31,5 @@ export function getEnumArray<
     }
   }
 
-  // enumSet.forEach((set1) => {
-  //   console.log(set1);
-  // });
   return enumSet;
 }
