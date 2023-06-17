@@ -18,22 +18,21 @@ export function getEnumObjectByCode<
 
 export function getEnumArray<
   T extends {
-    [key: string]: {
-      code: number;
-      title: string;
-      [k: string]: unknown;
-    };
+    code: number;
+    title: string;
   }
->(enumObject: T) {
+>(enumObject: Record<string, T>) {
   const enumSet = [];
 
   for (const key in enumObject) {
-    enumSet.push(enumObject[key]);
+    const obj = enumObject[key];
+    if (obj) {
+      enumSet.push(obj);
+    }
   }
 
   // enumSet.forEach((set1) => {
   //   console.log(set1);
   // });
-
   return enumSet;
 }

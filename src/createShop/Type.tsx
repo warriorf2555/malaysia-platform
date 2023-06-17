@@ -13,8 +13,8 @@ import {
   Grid,
 } from "@mantine/core";
 
-import { providerType } from "~/common/constants/providerType";
-import { getEnumObjectByCode, getEnumArray } from "~/helper";
+import { providerType } from "~/common/constants";
+import { getEnumArray } from "~/helper";
 
 const useStyles = createStyles((theme) => ({
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -96,14 +96,12 @@ function Type() {
 
   const providerSet = getEnumArray(providerType);
 
-  console.log("providerSet", providerSet[0]);
-
   const links = providerSet.map((item) => (
     <UnstyledButton
       className={classes.subLink}
-      key={item.title}
+      key={item?.title}
       onClick={() => {
-        mutate({ type: item.code });
+        mutate({ type: item?.code || 0 });
 
         // Only when newShop is string and not undefined
         if (newShop && typeof newShop === "string") {
@@ -119,7 +117,7 @@ function Type() {
 
       <div className="mt-2 flex items-center justify-center">
         <Text size="sm" fw={500}>
-          {item.title}
+          {item?.title}
         </Text>
       </div>
     </UnstyledButton>
