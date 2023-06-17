@@ -9,7 +9,7 @@ import {
   IconPlant,
 } from "@tabler/icons-react";
 
-const providerType = {
+export const providerType = {
   GYM: {
     icon: IconBarbell,
     title: "Gym",
@@ -50,4 +50,4 @@ const providerType = {
     title: "Nursery",
     code: 8,
   },
-};
+} as const;
