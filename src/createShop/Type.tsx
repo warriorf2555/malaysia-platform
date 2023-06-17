@@ -13,7 +13,8 @@ import {
   Grid,
 } from "@mantine/core";
 
-import { providerType } from "~/common/constants/providerType";
+import { providerType } from "~/common/constants";
+import { getEnumArray } from "~/helper";
 
 const useStyles = createStyles((theme) => ({
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -93,12 +94,14 @@ function Type() {
   const router = useRouter();
   const { newShop } = router.query;
 
-  const links = providerType.map((item) => (
+  const providerSet = getEnumArray(providerType);
+
+  const links = providerSet.map((item) => (
     <UnstyledButton
       className={classes.subLink}
       key={item.title}
       onClick={() => {
-        mutate({ type: item.code });
+        mutate({ type: item.code || 0 });
 
         // Only when newShop is string and not undefined
         if (newShop && typeof newShop === "string") {

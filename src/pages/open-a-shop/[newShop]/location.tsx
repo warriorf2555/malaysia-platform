@@ -9,7 +9,7 @@ import {
 } from "~/createShop/location-form-context";
 import { zodResolver } from "@mantine/form";
 
-import { errorCode } from "~/common/constants/errorCode";
+import { errorCode } from "~/common/constants";
 
 import { Group, Button, Grid } from "@mantine/core";
 import { IconMapSearch } from "@tabler/icons-react";
