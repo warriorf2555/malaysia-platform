@@ -5,9 +5,16 @@ import { useRouter } from "next/router";
 import { Button, Group } from "@mantine/core";
 import ShopOverview from "~/createShop/Overview";
 
+import { getEnumObjectByCode } from "~/helper";
+import { providerType } from "~/common/constants/providerType";
+
 function Overview() {
   const { mutate, isSuccess, data } = api.shop.create.useMutation();
   const router = useRouter();
+
+  const result = getEnumObjectByCode(providerType, 1);
+
+  console.log("providerType", result);
 
   const nextStep = () => {
     mutate();
