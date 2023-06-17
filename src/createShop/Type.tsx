@@ -99,9 +99,9 @@ function Type() {
   const links = providerSet.map((item) => (
     <UnstyledButton
       className={classes.subLink}
-      key={item?.title}
+      key={item.title}
       onClick={() => {
-        mutate({ type: item?.code || 0 });
+        mutate({ type: item.code || 0 });
 
         // Only when newShop is string and not undefined
         if (newShop && typeof newShop === "string") {
@@ -117,7 +117,7 @@ function Type() {
 
       <div className="mt-2 flex items-center justify-center">
         <Text size="sm" fw={500}>
-          {item?.title}
+          {item.title}
         </Text>
       </div>
     </UnstyledButton>
