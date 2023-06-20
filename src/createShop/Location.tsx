@@ -3,6 +3,13 @@ import { env } from "~/env.mjs";
 
 import { useJsApiLoader, GoogleMap, Marker } from "@react-google-maps/api";
 
+const googleMapStyles: google.maps.MapTypeStyle[] = [
+  {
+    elementType: "labels.icon",
+    stylers: [{ visibility: "off" }],
+  },
+];
+
 type LocationProps = {
   isConfirm: boolean;
   marker: {
@@ -48,9 +55,8 @@ const Location: React.FunctionComponent<LocationProps> = (props) => {
   if (!isLoading) {
     return (
       <div
-        className={`min-w-screen flex ${
-          props.isConfirm ? "min-h-[68vh] justify-end" : "justify-center"
-        } items-center `}
+        className={`min-w-screen flex ${props.isConfirm ? "min-h-[68vh] justify-end" : "justify-center"
+          } items-center `}
       >
         {/* Display Google map */}
         <GoogleMap
@@ -64,6 +70,9 @@ const Location: React.FunctionComponent<LocationProps> = (props) => {
           mapContainerClassName=""
           onClick={(e) => {
             props.isConfirm ? "" : onMapClick(e);
+          }}
+          options={{
+            styles: googleMapStyles,
           }}
         >
           <Marker
