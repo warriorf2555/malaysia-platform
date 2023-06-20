@@ -78,7 +78,7 @@ function LocationView() {
             })
           )}
         >
-          <Group position="right">
+          <Group position="right" className="lg:max-w-[82.8%]">
             <CircleProgress value={20}>
               <IconMapSearch size={22} />
             </CircleProgress>
@@ -106,7 +106,7 @@ function LocationView() {
           )}
 
           {!isConfirm ? (
-            <Group position="right" className="mt-auto">
+            <Group position="right" className="mt-5 lg:max-w-[82%]">
               <Button
                 type="button"
                 disabled={marker.lat === 0 && marker.lng === 0}
@@ -118,7 +118,7 @@ function LocationView() {
               </Button>
             </Group>
           ) : (
-            <Group position="right" className="mt-auto">
+            <Group position="right" className="mt-auto lg:max-w-[82%]">
               <Button type="submit">Next step</Button>
             </Group>
           )}

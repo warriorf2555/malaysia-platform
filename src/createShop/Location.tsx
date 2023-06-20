@@ -55,19 +55,19 @@ const Location: React.FunctionComponent<LocationProps> = (props) => {
   if (!isLoading) {
     return (
       <div
-        className={`min-w-screen flex ${props.isConfirm ? "min-h-[68vh] justify-end" : "justify-center"
-          } items-center `}
+        className={`min-w-screen flex ${
+          props.isConfirm ? "min-h-[68vh] justify-end" : "justify-center"
+        } items-center `}
       >
         {/* Display Google map */}
         <GoogleMap
           center={CENTER}
           zoom={15}
           mapContainerStyle={{
-            width: "60%",
-            height: props.isConfirm ? "55vh" : "68vh",
+            height: props.isConfirm ? "55vh" : "66vh",
             borderRadius: "25px",
           }}
-          mapContainerClassName=""
+          mapContainerClassName="lg:w-[64%] w-[85%]"
           onClick={(e) => {
             props.isConfirm ? "" : onMapClick(e);
           }}

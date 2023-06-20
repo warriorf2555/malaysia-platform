@@ -9,7 +9,7 @@ import CircleProgress from "@/common/RingProgress/CircleProgress";
 function NewShop() {
   return (
     <div>
-      <Group position="right">
+      <Group position="right" className="max-w-[75%]">
         <CircleProgress value={0}>
           <IconCategory size={22} />
         </CircleProgress>
