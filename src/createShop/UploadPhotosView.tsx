@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { useUser } from "@clerk/nextjs";
@@ -14,15 +15,16 @@ declare global {
 interface MainPhotoGridProps {
   userId: string;
   shopId: string;
-  handleUpload: (value: string) => void;
+  handleUpload: (result: any) => void;
   pictures: string[];
 }
 
 interface SubPhotoGridProps {
   userId: string;
   shopId: string;
-  handleUpload: (value: string) => void;
+  subHandleUpload: (result: any, index: number) => void;
   picture: string;
+  index?: number;
 }
 
 const MainPhotoGrid: React.FC<MainPhotoGridProps> = ({
@@ -72,44 +74,81 @@ const MainPhotoGrid: React.FC<MainPhotoGridProps> = ({
 const SubPhotoGrid: React.FC<SubPhotoGridProps> = ({
   userId,
   shopId,
-  handleUpload,
+  subHandleUpload,
   picture,
+  index,
 }) => {
   return (
-    <CldUploadWidget
-      onUpload={handleUpload}
-      uploadPreset="t7ggzuvs"
-      options={{
-        showUploadMoreButton: true,
-        clientAllowedFormats: ["jpg", "png", "jpeg"],
-        folder: `shop/${userId}/${shopId}`,
-      }}
-    >
-      {({ open }) => {
-        return (
-          <div
-            onClick={() => {
-              open?.();
-            }}
-            className="relative flex h-[300px] cursor-pointer flex-col items-center justify-center gap-4 border-2 border-dashed
+    <React.Fragment>
+      <CldUploadWidget
+        onUpload={(e: any) => subHandleUpload(e, index || 0)}
+        uploadPreset="t7ggzuvs"
+        options={{
+          showUploadMoreButton: true,
+          clientAllowedFormats: ["jpg", "png", "jpeg"],
+          folder: `shop/${userId}/${shopId}`,
+        }}
+      >
+        {({ open }) => {
+          return (
+            <div
+              onClick={() => {
+                open?.();
+              }}
+              className="relative flex h-[300px] cursor-pointer flex-col items-center justify-center gap-4 border-2 border-dashed
              border-neutral-300 p-20 text-neutral-500 transition hover:opacity-70"
-          >
-            <IconPhotoPlus />
-            <div className="text-lg font-semibold">Click to upload</div>
-            {picture ? (
-              <div className="absolute inset-0 h-full w-full">
-                <Image
-                  alt="upload"
-                  fill
-                  style={{ objectFit: "contain" }}
-                  src={picture}
-                />
-              </div>
-            ) : null}
-          </div>
-        );
-      }}
-    </CldUploadWidget>
+            >
+              <IconPhotoPlus />
+              <div className="text-lg font-semibold">Click to upload</div>
+              {picture ? (
+                <div className="absolute inset-0 h-full w-full">
+                  <Image
+                    alt="upload"
+                    fill
+                    style={{ objectFit: "contain" }}
+                    src={picture}
+                  />
+                </div>
+              ) : null}
+            </div>
+          );
+        }}
+      </CldUploadWidget>
+      <CldUploadWidget
+        onUpload={(e: any) => subHandleUpload(e, index || 0)}
+        uploadPreset="t7ggzuvs"
+        options={{
+          showUploadMoreButton: true,
+          clientAllowedFormats: ["jpg", "png", "jpeg"],
+          folder: `shop/${userId}/${shopId}`,
+        }}
+      >
+        {({ open }) => {
+          return (
+            <div
+              onClick={() => {
+                open?.();
+              }}
+              className="relative flex h-[300px] cursor-pointer flex-col items-center justify-center gap-4 border-2 border-dashed
+             border-neutral-300 p-20 text-neutral-500 transition hover:opacity-70"
+            >
+              <IconPhotoPlus />
+              <div className="text-lg font-semibold">Click to upload</div>
+              {picture ? (
+                <div className="absolute inset-0 h-full w-full">
+                  <Image
+                    alt="upload"
+                    fill
+                    style={{ objectFit: "contain" }}
+                    src={picture}
+                  />
+                </div>
+              ) : null}
+            </div>
+          );
+        }}
+      </CldUploadWidget>
+    </React.Fragment>
   );
 };
 
@@ -125,7 +164,6 @@ const UploadPhotosView = () => {
   const [pictures, setPictures] = useState<string[]>([]);
 
   const handleUpload = (result: any) => {
-    console.log("result", result);
     const arrayResult = structuredClone(pictures);
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument
@@ -133,11 +171,22 @@ const UploadPhotosView = () => {
     setPictures(arrayResult);
   };
 
+  const subHandleUpload = (result: any, index: number) => {
+    const arrayResult = structuredClone(pictures);
+    const subPictureIndex = index + 1;
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment
+    arrayResult[subPictureIndex] = result?.info?.secure_url;
+    arrayResult.push("");
+
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument
+    setPictures(arrayResult);
+  };
+
   console.log("pictures", pictures);
 
   if (shopId) {
     return (
-      <div className="flex min-h-[80vh] items-center justify-center">
+      <div className="flex min-h-[80vh] items-center justify-center ">
         <div className="max-w-[49vw]">
           <Grid>
             <Grid.Col xs={12}>
@@ -161,18 +210,31 @@ const UploadPhotosView = () => {
                 pictures={pictures}
               />
             </Grid.Col>
-            {pictures.slice(1).map((picture, index) => {
-              return (
-                <Grid.Col xs={6} key={index}>
-                  <SubPhotoGrid
-                    userId={userId}
-                    shopId={shopId}
-                    handleUpload={handleUpload}
-                    picture={picture}
-                  />
-                </Grid.Col>
-              );
-            })}
+            {pictures.length === 1 ? (
+              <Grid.Col xs={6}>
+                <SubPhotoGrid
+                  key={"initialSub"}
+                  userId={userId}
+                  shopId={shopId}
+                  subHandleUpload={subHandleUpload}
+                  picture={""}
+                />
+              </Grid.Col>
+            ) : (
+              pictures.slice(1).map((picture, index) => {
+                return (
+                  <Grid.Col xs={6} key={index}>
+                    <SubPhotoGrid
+                      userId={userId}
+                      shopId={shopId}
+                      subHandleUpload={subHandleUpload}
+                      picture={picture}
+                      index={index}
+                    />
+                  </Grid.Col>
+                );
+              })
+            )}
           </Grid>
         </div>
       </div>
