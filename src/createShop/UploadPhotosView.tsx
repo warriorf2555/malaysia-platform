@@ -114,40 +114,6 @@ const SubPhotoGrid: React.FC<SubPhotoGridProps> = ({
           );
         }}
       </CldUploadWidget>
-      <CldUploadWidget
-        onUpload={(e: any) => subHandleUpload(e, index || 0)}
-        uploadPreset="t7ggzuvs"
-        options={{
-          showUploadMoreButton: true,
-          clientAllowedFormats: ["jpg", "png", "jpeg"],
-          folder: `shop/${userId}/${shopId}`,
-        }}
-      >
-        {({ open }) => {
-          return (
-            <div
-              onClick={() => {
-                open?.();
-              }}
-              className="relative flex h-[300px] cursor-pointer flex-col items-center justify-center gap-4 border-2 border-dashed
-             border-neutral-300 p-20 text-neutral-500 transition hover:opacity-70"
-            >
-              <IconPhotoPlus />
-              <div className="text-lg font-semibold">Click to upload</div>
-              {picture ? (
-                <div className="absolute inset-0 h-full w-full">
-                  <Image
-                    alt="upload"
-                    fill
-                    style={{ objectFit: "contain" }}
-                    src={picture}
-                  />
-                </div>
-              ) : null}
-            </div>
-          );
-        }}
-      </CldUploadWidget>
     </React.Fragment>
   );
 };
