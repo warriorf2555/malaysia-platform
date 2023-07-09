@@ -151,7 +151,6 @@ const UploadPhotosView = () => {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment
       arrayResult[subPictureIndex] = result?.info?.secure_url;
     }
-    console.log("arrayResult", arrayResult);
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument
     setPictures(arrayResult);
