@@ -21,6 +21,7 @@ export const env = createEnv({
     NEXT_PUBLIC_GOOGLE_MAP_API_KEY: z.string(),
     NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: z.string(),
     NEXT_PUBLIC_CLOUDINARY_API_KEY: z.string(),
+    NEXT_PUBLIC_CLOUDINARY_PRESET_KEY: z.string(),
     // NEXT_PUBLIC_CLIENTVAR: z.string().min(1),
   },
 
@@ -39,6 +40,8 @@ export const env = createEnv({
     NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME:
       process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
     NEXT_PUBLIC_CLOUDINARY_API_KEY: process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY,
+    NEXT_PUBLIC_CLOUDINARY_PRESET_KEY:
+      process.env.NEXT_PUBLIC_CLOUDINARY_PRESET_KEY,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   /**

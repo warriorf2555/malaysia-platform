@@ -1,17 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import Image from "next/image";
+import { env } from "~/env.mjs";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { useUser } from "@clerk/nextjs";
-import Image from "next/image";
 
 import { Text, Title, Grid } from "@mantine/core";
 import { CldUploadWidget } from "next-cloudinary";
 import { IconPhotoPlus } from "@tabler/icons-react";
 
+const ADD = "ADD";
 declare global {
   let cloudinary: string;
 }
-
 interface MainPhotoGridProps {
   userId: string;
   shopId: string;
@@ -22,9 +23,10 @@ interface MainPhotoGridProps {
 interface SubPhotoGridProps {
   userId: string;
   shopId: string;
-  subHandleUpload: (result: any, index: number) => void;
+  subHandleUpload: (result: any, index: number, type: string) => void;
   picture: string;
   index?: number;
+  type?: string;
 }
 
 const MainPhotoGrid: React.FC<MainPhotoGridProps> = ({
@@ -36,7 +38,7 @@ const MainPhotoGrid: React.FC<MainPhotoGridProps> = ({
   return (
     <CldUploadWidget
       onUpload={handleUpload}
-      uploadPreset="t7ggzuvs"
+      uploadPreset={env.NEXT_PUBLIC_CLOUDINARY_PRESET_KEY}
       options={{
         showUploadMoreButton: true,
         clientAllowedFormats: ["jpg", "png", "jpeg"],
@@ -77,12 +79,13 @@ const SubPhotoGrid: React.FC<SubPhotoGridProps> = ({
   subHandleUpload,
   picture,
   index,
+  type,
 }) => {
   return (
     <React.Fragment>
       <CldUploadWidget
-        onUpload={(e: any) => subHandleUpload(e, index || 0)}
-        uploadPreset="t7ggzuvs"
+        onUpload={(e: any) => subHandleUpload(e, index || 0, type || "")}
+        uploadPreset={env.NEXT_PUBLIC_CLOUDINARY_PRESET_KEY}
         options={{
           showUploadMoreButton: true,
           clientAllowedFormats: ["jpg", "png", "jpeg"],
@@ -137,12 +140,18 @@ const UploadPhotosView = () => {
     setPictures(arrayResult);
   };
 
-  const subHandleUpload = (result: any, index: number) => {
+  const subHandleUpload = (result: any, index: number, type: string) => {
     const arrayResult = structuredClone(pictures);
     const subPictureIndex = index + 1;
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment
-    arrayResult[subPictureIndex] = result?.info?.secure_url;
-    arrayResult.push("");
+    if (type === ADD) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument
+      arrayResult.push(result?.info?.secure_url);
+    } else {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment
+      arrayResult[subPictureIndex] = result?.info?.secure_url;
+    }
+    console.log("arrayResult", arrayResult);
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument
     setPictures(arrayResult);
@@ -201,6 +210,18 @@ const UploadPhotosView = () => {
                 );
               })
             )}
+            {pictures.length > 1 ? (
+              <Grid.Col xs={6}>
+                <SubPhotoGrid
+                  key={"initialSub"}
+                  userId={userId}
+                  shopId={shopId}
+                  subHandleUpload={subHandleUpload}
+                  picture={""}
+                  type={ADD}
+                />
+              </Grid.Col>
+            ) : null}
           </Grid>
         </div>
       </div>
